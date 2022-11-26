@@ -1,18 +1,11 @@
 <?php
+$headers = [
+  'Authorization: Bearer J1dPDH7muIfaW2Zc1ZPUoMPeB48r4Aoa_p3LdBBS7yI'
+];
 
-include('../safeTweet.php');
+include('safeTweet.php');
 include('dbinfo.php');
-include('twitterCredentials.php');
-require_once('../TwitterAPIExchange.php');
 header('Content-Type: text/html; charset=utf-8');
-
-/** Set access tokens here - see: https://apps.twitter.com/ **/
-$APIsettings = array(
-	'oauth_access_token' => $oauthToken,
-	'oauth_access_token_secret' => $oauthTokenSecret,
-	'consumer_key' => $consumerKey,
-	'consumer_secret' => $consumerSecret
-	);
 
 // Connect to applications DB
 try {
@@ -49,16 +42,21 @@ if($wordid < 46209){
 	$appResponse->closeCursor();
 
 	if(safeTweet($tweet)){
-		// Post the tweet
-		$postfields = array(
-			'status' =>  $tweet);
-		$url = "https://api.twitter.com/1.1/statuses/update.json";
-		$requestMethod = "POST";
+		$status_data = array(
+		"status" => $tweet,
+		"language" => "fr",
+		"visibility" => "public"
+);
+	$ch_status = curl_init();
+curl_setopt($ch_status, CURLOPT_URL, "https://asstodon.social/api/v1/statuses");
+curl_setopt($ch_status, CURLOPT_POST, 1);
+curl_setopt($ch_status, CURLOPT_POSTFIELDS, $status_data);
+curl_setopt($ch_status, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch_status, CURLOPT_HTTPHEADER, $headers);
 
-		$twitter = new TwitterAPIExchange($APIsettings);
-		echo $twitter->buildOauth($url, $requestMethod)
-		->setPostfields($postfields)
-		->performRequest();
+$output_status = json_decode(curl_exec($ch_status));
+
+curl_close ($ch_status);	
 	}else{
 		file_get_contents("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 	}
