@@ -1,10 +1,13 @@
 <?php
+
+include('safeToot.php');
+include('MastoConfig.php');
+include('dbinfo.php');
+
 $headers = [
-  'Authorization: Bearer J1dPDH7muIfaW2Zc1ZPUoMPeB48r4Aoa_p3LdBBS7yI'
+  'Authorization: Bearer '.$token
 ];
 
-include('safeTweet.php');
-include('dbinfo.php');
 header('Content-Type: text/html; charset=utf-8');
 
 // Connect to applications DB
@@ -36,19 +39,20 @@ if($wordid < 46209){
 	$word = $result[0][0];
 	$response->closeCursor();
 
-	$tweet = $word . " du cul";
+	$toot = $word . " du cul";
 
 	$appResponse = $bddApp->query("UPDATE misc SET value = value + 1 WHERE appName = 'botDuCul'");
 	$appResponse->closeCursor();
 
-	if(safeTweet($tweet)){
+	if(safeToot($toot)){
 		$status_data = array(
-		"status" => $tweet,
+		"status" => $toot,
 		"language" => "fr",
-		"visibility" => "public"
+		"visibility" => "public",
+		"spoiler_text" => "CW du cul"
 );
 	$ch_status = curl_init();
-curl_setopt($ch_status, CURLOPT_URL, "https://asstodon.social/api/v1/statuses");
+curl_setopt($ch_status, CURLOPT_URL, $instance."api/v1/statuses");
 curl_setopt($ch_status, CURLOPT_POST, 1);
 curl_setopt($ch_status, CURLOPT_POSTFIELDS, $status_data);
 curl_setopt($ch_status, CURLOPT_RETURNTRANSFER, true);
