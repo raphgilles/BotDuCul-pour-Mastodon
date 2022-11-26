@@ -1,20 +1,19 @@
-# [@BotDuCul](https://twitter.com/BotDuCul)
+# [@BotDuCul](https://asstodon.social/BotDuCul) originallement [@BotDuCul](https://twitter.com/BotDuCul)
 
-Un bot Twitter qui énumère tous les mots de la langue française suivi de "du cul".
+Un bot Mastodon qui énumère tous les mots de la langue française suivi de "du cul".
 
 ## Installation
 
 Pour installer un BotDuCul, il vous faut :
 * Une base de données MySQL
 * Un serveur PHP
-* Un accès développeur à l'API de Twitter
+* Un jeton d'accès à créer dans l'onglet Paramètre / Développement de votre instance Mastodon
 
 Suivez ces 5 étapes du cul :
 1. Importez le fichier lexique.sql dans votre système de base de données et remplissez les variables dans un fichier dbinfo.php (`$dbhost`, `$dbname`, `$dblogin`, `$dbpassword`)
 2. Créez une deuxième table de données pour stocker l'avancement du bot dans la première base et remplissez les variables dans le fichier dbinfo.php (`$dbAppName`, `$dbAppLogin`, `$dbAppPassword`)
-3. Créez une application Twitter avec le compte du bot et remplissez les variables d'API dans le fichier twitterCredentials.php (`$oauthToken`, `$oauthTokenSecret`, `$consumerKey`, `$consumerSecret`)
-4. Récupérez les librairies [TwitterAPIExchange.php](https://github.com/J7mbo/twitter-api-php) et [SafeTweet.php](https://github.com/WhiteFangs/SafeTweet) et mettez les dans le dossier parent du fichier BotDuCul.php
-5. Lancez le fichier BotDuCul.php depuis votre serveur PHP et appréciez votre BotDuCul !
+3. Créez une application Mastodon avec le compte du bot et remplissez les variables d'API dans le fichier MastoConfig.php (`$instance`, `$token`)
+4. Lancez le fichier BotDuCul.php depuis votre serveur PHP et appréciez votre BotDuCul !
 
 ## Données
 
@@ -24,7 +23,7 @@ Les données Twitter des tweets du @BotDuCul sont disponibles dans leur reposito
 
 ### Qu'est ce que c'est ?
 
-[@BotDuCul](https://twitter.com/BotDuCul) est un bot Twitter français qui tweete tous les mots (et expressions) de la langue française suivi de "du cul". Il poste toutes les demi-heures et suit plus ou moins l'ordre alphabétique.
+[@BotDuCul](https://asstodon.social/BotDuCul) est un bot Twitter français qui tweete tous les mots (et expressions) de la langue française suivi de "du cul". Il poste toutes les demi-heures et suit plus ou moins l'ordre alphabétique.
 
 ### Qui a fait ça ?
 
@@ -104,7 +103,7 @@ Tu peux utiliser le [Dictionnaire Collaboratif du Cul](http://louphole.com/proje
 
 ### Est-ce que le @BotDuCul existe sur d'autres plateformes ?
 
-Oui, il existe sur [Mastodon](https://botsin.space/@botducul), même si je ne suis pas à l'origine de sa migration. Il existe aussi sur un forum Discord. C'est tout à ma connaissance, mais je veux bien découvrir d'autres de ces clones ailleurs !
+Oui, il existe sur [Mastodon](https://asstodon.social/BotDuCul), même si je ne suis pas à l'origine de sa migration. Il existe aussi sur un forum Discord. C'est tout à ma connaissance, mais je veux bien découvrir d'autres de ces clones ailleurs !
 
 ### Y a-t-il des bots similaires au @BotDuCul ?
 
